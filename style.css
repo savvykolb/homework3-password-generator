@@ -1,5 +1,7 @@
 * {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
+
+  /* I read somewhere that I would need this??  */
 }
 
 body {
