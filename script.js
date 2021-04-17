@@ -13,6 +13,8 @@
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
+var length;
+var charArray = [];
 
 // I am honestly not sure why I am using const instead of let or var. I just read to use const 
 const upperCase = [ 
@@ -73,9 +75,79 @@ const lowerCase = [
     'y',
     'z',
   ];
-  const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-  const specialCharacters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')','{', '}', '<', '>', '/', '.']; 
+
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+const specialCharacters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')','{', '}', '<', '>', '/', '.']; 
+
+// I need some variables. 
+// I need to generate the password.
+
+function generatePassword() {
+    length = 0;
+    charArray = [];
+   var passwordLength = prompt("How many letters would you like your password?");
+    console.log('passwordLength:', passwordLength)
+   
+    if (passwordLength > 8 && passwordLength < 129) { 
+        length = parseInt(passwordLength);
+        console.log('length:', length)
+       
+        var hasUppercase =  confirm("Would you like uppercase letters in your password?");
+        console.log('hasUppercase:', hasUppercase)
+
+        var hasLowercase = confirm("Would you like lowercase letters in your password?");
+        console.log('hasLowercase:', hasLowercase)
+
+        var hasNumbers = confirm("Would you like numbers in your password?");
+        console.log('hasNumbers:', hasNumbers)
+
+        var hasSpecialCharacters = confirm("Would you like special characters in your password?");
+        console.log('hasSpecialCharacters:', hasSpecialCharacters)
+    }
+    else {
+        alert("Please enter a valid length.");
+        generatePassword ();
+         
+    }
+
+    if (hasUppercase){
+        charArray = charArray.concat(upperCase);
+        console.log('charArray:', charArray)
+    } 
   
+    if (hasLowercase){
+        charArray = charArray.concat(lowerCase);
+        console.log('charArray:', charArray)
+    } 
+
+    if (hasNumbers){
+        charArray = charArray.concat(numbers);
+        console.log('charArray:', charArray)
+    } 
+
+    if (hasSpecialCharacters){
+        charArray = charArray.concat(specialCharacters);
+        console.log('charArray:', charArray)
+    } 
+
+    var randomChar = [];
+
+    
+    for (let i = 0; i < length; i++) {
+        var index = Math.floor(Math.random() * charArray.length);
+        console.log('index:', index);
+        console.log(charArray[index]); 
+
+        randomChar.push(charArray[index]);
+        console.log('randomChar:', randomChar)
+
+    
+    }
+
+return randomChar;
+
+}
+
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
