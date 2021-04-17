@@ -1,22 +1,8 @@
-// 1. I will need to click the button to display prompts.
-// 2. I need to be able to pick between 2 choices on prompts.
-// 3. I need to be able to pick the length of my password. 8-128
-// 4. THEN I choose lowercase, uppercase, numeric, and/or special characters
-// I need a way to store all these characters 
-// Start building password 
-// I will probably need to randomly choose from wach variable some characters to build a String 
-// if a user chooses 8 characters, take 2 charaacters from each character set if they chose all 
-// I will need Math.random to look into my variables to store all the characheters and randomluy choose one
-// need a variable that will be the final password and I slowily keep adding to it. 
-// May need a way to shuffle the characters so they are not 11aa&& 
-// 5. Once prompts are all answered my password needs to be displayed on the page.
-
-// Assignment Code
+// Global Variables 
 var generateBtn = document.querySelector("#generate");
 var length;
 var charArray = [];
 
-// I am honestly not sure why I am using const instead of let or var. I just read to use const 
 const upperCase = [ 
 
     'A',
@@ -79,13 +65,15 @@ const lowerCase = [
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 const specialCharacters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')','{', '}', '<', '>', '/', '.']; 
 
-// I need some variables. 
-// I need to generate the password.
+// This function is used to generate the password. All steps taken to generate password are found in this function. 
 
 function generatePassword() {
+    // These reset the function to clear storage from global variables 
     length = 0;
     charArray = [];
-   var passwordLength = prompt("Enter length of desired password between 8-128 characters.");
+
+    // This is our first prompt to trigger the line of prompts. This one is the only one that needed a else statement. This is because the rest of the prompts are T/F statements. 
+   var passwordLength = prompt("Enter length of desired password. Value must be between 8-128 characters.");
     console.log('passwordLength:', passwordLength)
    
     if (passwordLength > 8 && passwordLength < 129) { 
@@ -110,6 +98,8 @@ function generatePassword() {
          
     }
 
+// This is where we take the function answers from above and store them in charArray. Concat basically takes 2 arrays and combines them into onemptied. Otherwise it created objects. 
+
     if (hasUppercase){
         charArray = charArray.concat(upperCase);
         console.log('charArray:', charArray)
@@ -130,9 +120,10 @@ function generatePassword() {
         console.log('charArray:', charArray)
     } 
 
-    var randomChar = [];
+// This is the equation that takes all the compliled characters in charArray from answered prompts and radomizes it we then 'pushed' charArrays length index into the new variable randomChar   
 
-    
+    var randomChar = [];
+ 
     for (let i = 0; i < length; i++) {
         var index = Math.floor(Math.random() * charArray.length);
         console.log('index:', index);
@@ -144,15 +135,14 @@ function generatePassword() {
     
     }
 
-    randomChar.join('');
-    console.log(randomChar.join(''))
-
+// Then we have to return the output to have it 'written' later You cannot call it because then it wont provide what it 'written' to the html or 'blank' space in generatePassword below. I also had to add the 'join' to get rid of commas within the string.     
 
 return randomChar.join('');
 
 }
 
-// Write password to the #password input
+// This is what was provided. It calls the generate function above to 'write' it on the page. 
+
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
@@ -161,7 +151,8 @@ function writePassword() {
 
 }
 
-// Add event listener to generate button
+// This was provided as WEBGL_lose_context. It is the event listener that starts this java when button is pushed. 
+
 generateBtn.addEventListener("click", writePassword);
 
 
